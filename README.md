@@ -6,35 +6,37 @@ OS project  Creating UNIX Shell
 This is a custom implementation of a UNIX shell that supports basic command execution, job control, and variable handling. The shell has been developed across multiple versions, each adding functionality and improving performance.
 
 ## Features
-
 ### Version 01
-- Basic command execution: Run commands like `ls`, `pwd`, etc.
-- Simple prompt to take user input.
+The first version of the shell implements the following capabilities:
+- **Prompt Display**: The shell program displays a prompt, which is `PUCITshell:-`.
+- **Command Execution**: The user can type a command (with options and arguments) in a single line. The shell parses the line into tokens, forks a new process, and passes those tokens to the `exec` family of functions for execution. The parent process waits for the child process to terminate before displaying the prompt again.
+- **Exit Shell**: The user can quit the shell by pressing `<CTRL+D>`.
 
 ### Version 02
-- Support for background jobs using `&`.
-- Handling of built-in commands:
-  - `cd`: Change directory
-  - `exit`: Terminate the shell
+This version enhances the shell by adding input and output redirection:
+- **Redirection**: Allows users to redirect `stdin` and `stdout` for new processes using `<` and `>`.
+- **Pipes**: Supports the use of pipes for command chaining.
 
 ### Version 03
-- Implementation of the `jobs` command to list background jobs.
-- Enhanced error handling for commands and job control.
+This version introduces background job handling:
+- **Background Execution**: Commands can be placed in the background by appending `&` to the command line. 
 
 ### Version 04
-- Addition of the `kill <pid>` command to terminate background jobs.
-- Improved feedback for job status and termination.
+This version adds command history:
+- **Command History**: Users can repeat previously issued commands using `!number`, where the number indicates which command to repeat. The history file maintains the last 10 commands.
 
 ### Version 05
-- Implementation of environment variables for more flexible shell behavior.
-- User-defined variable support, allowing users to create and manage their own variables.
+This version distinguishes between built-in and external commands:
+- **Built-in Commands**: The shell supports built-in commands such as `cd`, `exit`, `jobs`, `kill <pid>`, and `help`.
 
 ### Version 06 (Bonus)
-- Introduction of a variable storage system, allowing for local/user-defined and global variables.
-- Ability to access and modify both local and environment variables within the shell.
+This version introduces variable handling:
+- **Variable Management**: The shell supports local/user-defined and environment variables. Users can assign values to variables, retrieve them, and list them.
+- **Variable Storage**: A system is implemented to distinguish between local and global variables using a data structure.
 
 ## Installation Instructions
-To compile and run the shell, use the following commands:
+To compile and run the shell:
 ```bash
 gcc -o myshell myshell.c
 ./myshell
+
